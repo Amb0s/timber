@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "timber",
+  "version": "${version}",
+
+  "name": "Timber!",
+  "description": "Cut down a tree with an axe",
+  "authors": [
+    "TehKrush",
+    "Ambos"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Amb0s/timber",
+    "sources": "https://github.com/Amb0s/timber",
+    "issues": "https://github.com/Amb0s/timber/issues"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ambos.timber.Timber"
+    ]
+  },
+  "mixins": [
+    "timber.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3"
+  },
+  "suggests": {
+  }
+}
