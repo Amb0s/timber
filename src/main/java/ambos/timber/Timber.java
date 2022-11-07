@@ -1,6 +1,6 @@
 package ambos.timber;
 
-import azurelmao.halplibe.mixin.helper.BlockInterface;
+import turniplabs.halplibe.mixin.helper.BlockInterface;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.src.Block;
 import org.slf4j.Logger;

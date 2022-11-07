@@ -2,7 +2,7 @@ package ambos.timber.mixin;
 
 import ambos.timber.BlockTree;
 import ambos.timber.Tree;
-import azurelmao.halplibe.mixin.helper.BlockInterface;
+import turniplabs.halplibe.mixin.helper.BlockInterface;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
