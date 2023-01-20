@@ -1,6 +1,6 @@
 package ambos.timber;
 
-import turniplabs.halplibe.mixin.helper.BlockInterface;
+import turniplabs.halplibe.mixin.accessors.BlockAccessor;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.src.Block;
 import org.slf4j.Logger;
@@ -33,8 +33,8 @@ public class Timber implements ModInitializer {
                     treeBlock.setMossGrowable();
                 }
 
-                ((BlockInterface) treeBlock).callSetHardness(Tree.BARE_HANDS_HARDNESS);
-                ((BlockInterface) treeBlock).callSetStepSound(Tree.SOUND);
+                ((BlockAccessor) treeBlock).callSetHardness(Tree.BARE_HANDS_HARDNESS);
+                ((BlockAccessor) treeBlock).callSetStepSound(Tree.SOUND);
             }
         }
 

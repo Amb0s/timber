@@ -2,7 +2,7 @@ package ambos.timber.mixin;
 
 import ambos.timber.BlockTree;
 import ambos.timber.Tree;
-import turniplabs.halplibe.mixin.helper.BlockInterface;
+import turniplabs.halplibe.mixin.accessors.BlockAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
@@ -22,13 +22,13 @@ public class WorldMixin {
 
         if (!isSneaking && inHand != null && inHand.getItem() instanceof ItemToolAxe) {
             for (int logType: Tree.LOG_TYPES) {
-                ((BlockInterface) Block.blocksList[logType]).callSetHardness(Tree.AXE_HARDNESS);
+                ((BlockAccessor) Block.blocksList[logType]).callSetHardness(Tree.AXE_HARDNESS);
             }
 
             BlockTree.setAxe(true);
         } else {
             for (int logType: Tree.LOG_TYPES) {
-                ((BlockInterface) Block.blocksList[logType]).callSetHardness(Tree.BARE_HANDS_HARDNESS);
+                ((BlockAccessor) Block.blocksList[logType]).callSetHardness(Tree.BARE_HANDS_HARDNESS);
             }
 
             BlockTree.setAxe(false);
