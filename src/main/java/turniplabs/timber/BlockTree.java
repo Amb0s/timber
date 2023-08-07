@@ -1,16 +1,18 @@
-package ambos.timber;
+package turniplabs.timber;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockLog;
-import net.minecraft.src.World;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockLog;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.enums.EnumDropCause;
+import net.minecraft.core.world.World;
 
 import java.util.Arrays;
 
 public class BlockTree extends BlockLog {
     public static boolean isAxe;
 
-    public BlockTree(int i) {
-        super(i);
+    public BlockTree(String key, int id) {
+        super(key, id);
     }
 
     public static void setAxe(boolean isAxe) {
@@ -28,7 +30,8 @@ public class BlockTree extends BlockLog {
                         Block block = Block.blocksList[world.getBlockId(x + j, y + m, z + k)];
                         int i1 = world.getBlockMetadata(x + j, y + m, z + k);
                         if (block != null && world.setBlockWithNotify(x + j, y + m, z + k, 0)) {
-                            block.dropBlockAsItem(world, x + j, y + m, z + k, i1);
+                            block.dropBlockWithCause(world, EnumDropCause.PROPER_TOOL,x + j, y + m, z + k, i1,
+                                    new TileEntity());
                         }
                     }
                 }
@@ -45,7 +48,7 @@ public class BlockTree extends BlockLog {
         byte i = 4;
         int j = i + 1;
 
-        if (world.checkChunksExist(x - j, y - j, z - j, x + j, y + j, z + j)) {
+        if (world.areBlocksLoaded(x - j, y - j, z - j, x + j, y + j, z + j)) {
             for (int k = -i; k <= i; ++k) {
                 for (int m = -i; m <= i; ++m) {
                     for (int n = -i; n <= i; ++n) {

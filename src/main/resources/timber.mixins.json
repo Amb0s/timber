@@ -1,7 +1,7 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "ambos.timber.mixin",
+    "package": "turniplabs.timber.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
     ],

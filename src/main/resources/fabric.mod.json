@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "timber",
   "version": "${version}",
-
   "name": "Timber!",
   "description": "Cut down a tree with an axe",
   "authors": [
@@ -10,23 +9,20 @@
     "Ambos"
   ],
   "contact": {
-    "homepage": "https://github.com/Amb0s/timber",
-    "sources": "https://github.com/Amb0s/timber",
-    "issues": "https://github.com/Amb0s/timber/issues"
+    "homepage": "https://github.com/Turnip-Labs",
+    "sources": "https://github.com/Turnip-Labs/timber",
+    "issues": "https://github.com/Turnip-Labs/timber/issues"
   },
-
   "license": "MIT",
-
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ambos.timber.Timber"
+      "turniplabs.timber.Timber"
     ]
   },
   "mixins": [
     "timber.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.13.3"
   },
