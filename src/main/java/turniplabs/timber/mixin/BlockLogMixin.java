@@ -4,11 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.entity.EntityPainting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.tool.ItemTool;
 import net.minecraft.core.item.tool.ItemToolAxe;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.Arrays;
 
 @Mixin(value = BlockLog.class, remap = false)
@@ -32,8 +29,6 @@ final class BlockLogMixin {
                 Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id
         };
 
-        int damage = 0;
-
         if (!isSneaking && inHand != null && inHand.getItem() instanceof ItemToolAxe) {
             byte i = 1;
 
@@ -41,20 +36,19 @@ final class BlockLogMixin {
                 for (int k = -i; k <= i; ++k) {
                     for (int m = 0; m <= i; ++m) {
                         int n = world.getBlockId(x + j, y + m, z + k);
-                        if (Arrays.stream(logIDs).anyMatch(Integer.valueOf(n)::equals)) {
+                        if (Arrays.stream(logIDs).anyMatch(Integer.valueOf(n)::equals) &&
+                                (inHand.getMaxDamage() - inHand.getMetadata()) > 0) {
+                            inHand.damageItem(1, player);
                             Block block = Block.blocksList[world.getBlockId(x + j, y + m, z + k)];
                             int i1 = world.getBlockMetadata(x + j, y + m, z + k);
                             if (block != null && world.setBlockWithNotify(x + j, y + m, z + k, 0)) {
                                 block.dropBlockWithCause(world, EnumDropCause.PROPER_TOOL,x + j, y + m, z + k,
                                         i1, new TileEntity());
-                                damage += 1;
                             }
                         }
                     }
                 }
             }
-
-            inHand.damageItem(damage, player);
         }
     }
 }
