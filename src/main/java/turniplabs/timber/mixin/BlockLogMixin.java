@@ -4,8 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.EntityPainting;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.tool.ItemTool;
 import net.minecraft.core.item.tool.ItemToolAxe;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,19 +16,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.Arrays;
 
 @Mixin(value = BlockLog.class, remap = false)
 final class BlockLogMixin {
     @Inject(method = "onBlockRemoval", at = @At("HEAD"), require = 0)
     private void checkAxe(World world, int x, int y, int z, CallbackInfo ci) {
-        boolean isSneaking = Minecraft.getMinecraft(Minecraft.class).thePlayer.isSneaking();
-        ItemStack inHand = Minecraft.getMinecraft(Minecraft.class).thePlayer.getCurrentEquippedItem();
+        EntityPlayer player = Minecraft.getMinecraft(Minecraft.class).thePlayer;
+        ItemStack inHand = player.getCurrentEquippedItem();
+        boolean isSneaking = player.isSneaking();
 
         int[] logIDs = {
                 Block.logOak.id, Block.logPine.id, Block.logBirch.id,
                 Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id
         };
+
+        int damage = 0;
 
         if (!isSneaking && inHand != null && inHand.getItem() instanceof ItemToolAxe) {
             byte i = 1;
@@ -40,11 +47,14 @@ final class BlockLogMixin {
                             if (block != null && world.setBlockWithNotify(x + j, y + m, z + k, 0)) {
                                 block.dropBlockWithCause(world, EnumDropCause.PROPER_TOOL,x + j, y + m, z + k,
                                         i1, new TileEntity());
+                                damage += 1;
                             }
                         }
                     }
                 }
             }
+
+            inHand.damageItem(damage, player);
         }
     }
 }
