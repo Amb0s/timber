@@ -35,15 +35,15 @@ final class BlockLogMixin {
             for (int j = -i; j <= i; ++j) {
                 for (int k = -i; k <= i; ++k) {
                     for (int m = 0; m <= i; ++m) {
-                        int n = world.getBlockId(x + j, y + m, z + k);
-                        if (Arrays.stream(logIDs).anyMatch(Integer.valueOf(n)::equals) &&
+                        int blockId = world.getBlockId(x + j, y + m, z + k);
+                        if (Arrays.stream(logIDs).anyMatch(Integer.valueOf(blockId)::equals) &&
                                 (inHand.getMaxDamage() - inHand.getMetadata()) > 0) {
                             inHand.damageItem(1, player);
                             Block block = Block.blocksList[world.getBlockId(x + j, y + m, z + k)];
-                            int i1 = world.getBlockMetadata(x + j, y + m, z + k);
+                            int blockMetadata = world.getBlockMetadata(x + j, y + m, z + k);
                             if (block != null && world.setBlockWithNotify(x + j, y + m, z + k, 0)) {
                                 block.dropBlockWithCause(world, EnumDropCause.PROPER_TOOL,x + j, y + m, z + k,
-                                        i1, new TileEntity());
+                                        blockMetadata, new TileEntity());
                             }
                         }
                     }
