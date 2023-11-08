@@ -1,5 +1,7 @@
 # Timber!
 
+Note: BTA! 1.7.7.1 will include a "treecapitator" gamerule and will make this mode obsolete
+
 ## Changes
 
 * Allows the player to cut down a tree with an axe
