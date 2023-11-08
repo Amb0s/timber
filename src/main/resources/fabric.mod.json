@@ -3,7 +3,7 @@
   "id": "timber",
   "version": "${version}",
   "name": "Timber!",
-  "description": "Cut down a tree with an axe",
+  "description": "Allows felling an entire tree when removing the bottom block",
   "authors": [
     "TehKrush",
     "Ambos"
